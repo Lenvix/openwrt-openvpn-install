@@ -40,7 +40,7 @@ Packages used: `openvpn-openssl` and `openvpn-easy-rsa` (which pulls in
 Download the script, then run it (OpenWrt ships `wget` through `uclient-fetch`):
 
 ```sh
-wget -O openvpn-install.sh https://raw.githubusercontent.com/Lenvix/openwrt-openvpn-install/main/openvpn-install.sh && sh openvpn-install.sh
+wget -O openvpn-install.sh https://raw.githubusercontent.com/Lenvix/openwrt-openvpn-install/main/openvpn-install.sh && chmod +x openvpn-install.sh && ./openvpn-install.sh
 ```
 
 Do not pipe the script into `sh`.
@@ -142,8 +142,8 @@ Set `AUTO_INSTALL=y`. Every question then takes its default unless you
 override it with the variable listed below.
 
 ```sh
-AUTO_INSTALL=y sh openvpn-install.sh
-AUTO_INSTALL=y ENDPOINT=vpn.example.org PROTOCOL_CHOICE=2 PORT=443 ROUTE_MODE=2 CLIENT=laptop sh openvpn-install.sh
+AUTO_INSTALL=y ./openvpn-install.sh
+AUTO_INSTALL=y ENDPOINT=vpn.example.org PROTOCOL_CHOICE=2 PORT=443 ROUTE_MODE=2 CLIENT=laptop ./openvpn-install.sh
 ```
 
 | Variable | Values | Default |
@@ -187,10 +187,10 @@ variables that is already set skips its question.
 Set `MENU_OPTION` to answer the menu without a terminal:
 
 ```sh
-MENU_OPTION=1 CLIENT=phone sh openvpn-install.sh            # add client "phone" (passwordless)
-MENU_OPTION=2 CLIENT=phone sh openvpn-install.sh            # revoke client "phone"
-MENU_OPTION=3 sh openvpn-install.sh                         # remove OpenVPN (keeps packages)
-MENU_OPTION=3 REMOVE_PACKAGES=y sh openvpn-install.sh       # remove OpenVPN and the packages it installed
+MENU_OPTION=1 CLIENT=phone ./openvpn-install.sh             # add client "phone" (passwordless)
+MENU_OPTION=2 CLIENT=phone ./openvpn-install.sh             # revoke client "phone"
+MENU_OPTION=3 ./openvpn-install.sh                          # remove OpenVPN (keeps packages)
+MENU_OPTION=3 REMOVE_PACKAGES=y ./openvpn-install.sh        # remove OpenVPN and the packages it installed
 ```
 
 | Variable | Used by | Meaning |
@@ -251,7 +251,7 @@ that client and add it again.
 ## Uninstall
 
 Run the script and choose **3) Remove OpenVPN**, or run
-`MENU_OPTION=3 sh openvpn-install.sh`. The removal:
+`MENU_OPTION=3 ./openvpn-install.sh`. The removal:
 
 - deletes the `<instance>` OpenVPN instance and its state section
   `ovpninstall_meta`, which stops the instance;

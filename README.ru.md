@@ -47,7 +47,7 @@ OpenWrt: BusyBox `ash`, `opkg` или `apk`, вся настройка чере�
 `uclient-fetch`):
 
 ```sh
-wget -O openvpn-install.sh https://raw.githubusercontent.com/Lenvix/openwrt-openvpn-install/main/openvpn-install.sh && sh openvpn-install.sh
+wget -O openvpn-install.sh https://raw.githubusercontent.com/Lenvix/openwrt-openvpn-install/main/openvpn-install.sh && chmod +x openvpn-install.sh && ./openvpn-install.sh
 ```
 
 Не передавайте скрипт в `sh`
@@ -170,8 +170,8 @@ wget -O openvpn-install.sh https://raw.githubusercontent.com/Lenvix/openwrt-open
 ниже.
 
 ```sh
-AUTO_INSTALL=y sh openvpn-install.sh
-AUTO_INSTALL=y ENDPOINT=vpn.example.org PROTOCOL_CHOICE=2 PORT=443 ROUTE_MODE=2 CLIENT=laptop sh openvpn-install.sh
+AUTO_INSTALL=y ./openvpn-install.sh
+AUTO_INSTALL=y ENDPOINT=vpn.example.org PROTOCOL_CHOICE=2 PORT=443 ROUTE_MODE=2 CLIENT=laptop ./openvpn-install.sh
 ```
 
 | Переменная | Значения | По умолчанию |
@@ -215,10 +215,10 @@ AUTO_INSTALL=y ENDPOINT=vpn.example.org PROTOCOL_CHOICE=2 PORT=443 ROUTE_MODE=2 
 Задайте `MENU_OPTION`, чтобы ответить на меню без терминала:
 
 ```sh
-MENU_OPTION=1 CLIENT=phone sh openvpn-install.sh            # add client "phone" (passwordless)
-MENU_OPTION=2 CLIENT=phone sh openvpn-install.sh            # revoke client "phone"
-MENU_OPTION=3 sh openvpn-install.sh                         # remove OpenVPN (keeps packages)
-MENU_OPTION=3 REMOVE_PACKAGES=y sh openvpn-install.sh       # remove OpenVPN and the packages it installed
+MENU_OPTION=1 CLIENT=phone ./openvpn-install.sh             # add client "phone" (passwordless)
+MENU_OPTION=2 CLIENT=phone ./openvpn-install.sh             # revoke client "phone"
+MENU_OPTION=3 ./openvpn-install.sh                          # remove OpenVPN (keeps packages)
+MENU_OPTION=3 REMOVE_PACKAGES=y ./openvpn-install.sh        # remove OpenVPN and the packages it installed
 ```
 
 По порядку: добавить клиента `phone` (без пароля); отозвать клиента `phone`;
@@ -286,7 +286,7 @@ apk update && apk add openvpn-openssl openvpn-easy-rsa         # 25.12+
 ## Удаление
 
 Запустите скрипт и выберите **3) Remove OpenVPN** (удалить OpenVPN) или
-выполните `MENU_OPTION=3 sh openvpn-install.sh`. При удалении скрипт:
+выполните `MENU_OPTION=3 ./openvpn-install.sh`. При удалении скрипт:
 
 - удаляет экземпляр OpenVPN `<экземпляр>` и секцию состояния
   `ovpninstall_meta`, что останавливает экземпляр;
